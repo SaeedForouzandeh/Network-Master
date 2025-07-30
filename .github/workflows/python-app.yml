@@ -23,10 +23,10 @@ jobs:
           pip install -r requirements.txt
           pip install pyinstaller
       - name: Build EXE with PyInstaller
-        run: pyinstaller --onefile --windowed ColorPaletteExtractor.py --icon=logo.ico
+        run: pyinstaller --onefile --windowed NetworkMaster.py 
 
       - name: Upload to Release
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v0.1
         with:
           files: dist/*.exe
         env:
