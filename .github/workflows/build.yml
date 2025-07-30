@@ -3,11 +3,11 @@ name: Build NetworkMaster EXE
 on:
   push:
     tags:
-      - 'v*'  # Trigger on version tags (e.g. v1.0, v2.0)
+      - 'v*'
 
 jobs:
   build:
-    runs-on: windows-latest  # Windows required for PyInstaller
+    runs-on: windows-latest
 
     steps:
     - name: Checkout code
@@ -25,9 +25,14 @@ jobs:
 
     - name: Build with PyInstaller
       run: |
-        pyinstaller --onefile --noconsole --name NetworkMaster NetworkMaster.py
+        # Create hook file for speedtest
+        mkdir -p hooks
+        echo "from PyInstaller.utils.hooks import collect_data_files" > hooks/hook-speedtest.py
+        echo "datas = collect_data_files('speedtest')" >> hooks/hook-speedtest.py
+        
+        pyinstaller --onefile --noconsole --name NetworkMaster --additional-hooks-dir=hooks NetworkMaster.py
 
-    - name: Upload artifact (for testing)
+    - name: Upload artifact
       uses: actions/upload-artifact@v4
       with:
         name: NetworkMaster-EXE
