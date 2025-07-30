@@ -234,7 +234,7 @@ class NetworkMasterPro:
                                       text="Loading...",
                                       style='Data.TLabel')
         self.quick_ip_label.pack(anchor=tk.W)
-        
+        #https://github.com/SaeedForouzandeh/Network-Master
         # Full scan button
         scan_btn = ttk.Button(sidebar,
                             text="🔄 Full Network Scan",
