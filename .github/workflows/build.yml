@@ -1,0 +1,35 @@
+name: Build EXE Release
+
+on:
+  push:
+    tags:
+      - 'v*'  # Trigger workflow when a tag like v1.0, v2.0, etc. is pushed
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.9'
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install pyinstaller requests psutil speedtest python-whois dnspython pillow matplotlib geopy folium
+
+    - name: Build EXE with PyInstaller
+      run: |
+        pyinstaller --onefile --windowed NetworkMaster.py
+
+    - name: Create Release
+      uses: softprops/action-gh-release@v1
+      with:
+        files: dist/NetworkMaster.exe
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
