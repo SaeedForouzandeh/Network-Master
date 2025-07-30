@@ -43,7 +43,8 @@ cd network-master
 
 ```bash
 pip install requests psutil speedtest-cli python-whois dnspython Pillow matplotlib geopy folium
-
+pip install requests psutil speedtest-cli python-whois dnspython matplotlib pillow geopy folium tk
+pip install requests colorama psutil dnspython
 ```
 
 
