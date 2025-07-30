@@ -3,7 +3,7 @@ name: Build EXE Release
 on:
   push:
     tags:
-      - 'v*'  # Trigger workflow when a tag like v1.0, v2.0, etc. is pushed
+      - 'v*'
 
 jobs:
   build:
@@ -25,7 +25,13 @@ jobs:
 
     - name: Build EXE with PyInstaller
       run: |
-        pyinstaller --onefile --windowed NetworkMaster.py
+        pyinstaller --onefile --noconsole NetworkMaster.py
+
+    - name: Upload Artifact (برای تست)
+      uses: actions/upload-artifact@v2
+      with:
+        name: NetworkMaster-EXE
+        path: dist/NetworkMaster.exe
 
     - name: Create Release
       uses: softprops/action-gh-release@v1
