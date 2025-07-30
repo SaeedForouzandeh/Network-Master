@@ -38,7 +38,7 @@ class NetworkMasterPro:
             "https://api.myip.com"
         ]
         self.api_delay = 1.5  # Rate limiting
-        
+        #https://github.com/SaeedForouzandeh/Network-Master
         # Initialize results storage
         self.results = {
             "ip_info": {},
