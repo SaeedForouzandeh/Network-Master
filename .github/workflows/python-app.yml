@@ -3,7 +3,7 @@ name: Build and Release EXE
 on:
   push:
     tags:
-      - 'v*'  # فقط وقتی تگی مثل v1.0.0 ایجاد بشه، اجرا میشه
+      - 'v*'
 
 jobs:
   build:
@@ -24,6 +24,9 @@ jobs:
 
       - name: Build EXE with PyInstaller
         run: pyinstaller --onefile NetworkMaster.py
+
+      - name: List dist folder contents
+        run: dir dist
 
       - name: Upload EXE to GitHub Release
         uses: softprops/action-gh-release@v1
