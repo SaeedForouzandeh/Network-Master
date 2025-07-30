@@ -3,7 +3,7 @@ name: Build and Release EXE
 on:
   push:
     tags:
-      - 'v*'  # فقط وقتی تگ‌ جدید (مثل v1.0.0) ایجاد بشه اجرا میشه
+      - 'v*'  # فقط وقتی تگی مثل v1.0.0 ایجاد بشه، اجرا میشه
 
 jobs:
   build:
@@ -16,18 +16,18 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
-          python-version: 3.10
+          python-version: '3.10'
 
       - name: Install dependencies
         run: |
-          pip install -r requirements.txt
           pip install pyinstaller
-      - name: Build EXE with PyInstaller
-        run: pyinstaller --onefile --windowed NetworkMaster.py 
 
-      - name: Upload to Release
-        uses: softprops/action-gh-release@v0.1
+      - name: Build EXE with PyInstaller
+        run: pyinstaller --onefile NetworkMaster.py
+
+      - name: Upload EXE to GitHub Release
+        uses: softprops/action-gh-release@v1
         with:
-          files: dist/*.exe
+          files: dist/NetworkMaster.exe
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
