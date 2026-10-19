@@ -1,0 +1,6 @@
+requests
+psutil
+speedtest-cli==2.1.3
+dnspython
+Pillow
+folium

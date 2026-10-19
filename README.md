@@ -1,66 +1,39 @@
-<h1 align="center">🌐 Network Master - V 0.1</h1>
-<p align="center">
-  <b>Advanced GUI Network Toolkit</b> • <b>ابزار گرافیکی پیشرفته مدیریت شبکه</b><br>
-  <i>Built with Python & Tkinter • توسعه یافته با پایتون و Tkinter</i>
-</p>
+# Network Master
 
-<p align="center">
-  <a href="#features">⚙️ Features | ویژگی‌ها</a> •
-  <a href="#installation--نصب">📦 Installation | نصب</a> •
-  <a href="#usage--نحوه-اجرا">🚀 Usage | نحوه اجرا</a> •
-  <a href="#license--مجوز">🛡 License | مجوز</a>
-</p>
+A Python/Tkinter desktop tool for local network information, public IP lookup, DNS queries, speed tests, device discovery, geolocation, and basic local port checks. The blue glass-style interface uses a sidebar, NM icon, live metric cards, traffic chart, traffic distribution, and recent activity panels. The public IP card fetches the IP country's flag when the flag service is available.
 
----
+## Requirements
 
-## ⚙️ Features | ویژگی‌ها
+- Python 3.10 or newer with Tkinter
+- Windows or Linux with `ping` and `arp` available in `PATH`
+- An internet connection for public IP, geolocation, and speed tests
 
-| 🌐 English Features                    | 🇮🇷 امکانات فارسی                           |
-|----------------------------------------|---------------------------------------------|
-| View public & local IP info            | مشاهده IP عمومی و محلی                      |
-| Ping test and port scanner             | تست پینگ و اسکن پورت                       |
-| DNS Lookup and DNS Leak test          | بررسی DNS و نشتی DNS                        |
-| Speed test (Download, Upload, Ping)    | تست سرعت اینترنت (دانلود، آپلود، پینگ)    |
-| Scan connected devices on network      | اسکن دستگاه‌های متصل به شبکه                |
-| IP Geolocation with interactive map    | موقعیت‌یابی IP روی نقشه تعاملی             |
-| Real-time traffic chart & dashboard    | نمودار زنده ترافیک و داشبورد شبکه         |
-| Security scan overview                 | بررسی امنیتی و نمایش گزارش اولیه           |
-
----
-
-## 📦 Installation | نصب
-
-> Requires Python 3.8+
-
-1. Clone this repo:
-```bash
-git clone https://github.com/SaeedForouzandeh/Network-Master.git
-cd network-master
-
-```
-
-## Install required packages:
+## Install and run
 
 ```bash
-pip install requests psutil speedtest-cli python-whois dnspython Pillow matplotlib geopy folium
-pip install requests psutil speedtest-cli python-whois dnspython matplotlib pillow geopy folium tk
-pip install requests colorama psutil dnspython
-```
-
-
---- 
-## 🚀 Usage
-
-Simply run the main script:
-
-```bash
+python -m venv .venv
+# Windows: .venv\Scripts\activate
+# Linux: source .venv/bin/activate
+python -m pip install -r requirements.txt
 python NetworkMaster.py
 ```
----
 
-## 🛡 License | مجوز
-This project is licensed under the MIT License.
-این پروژه تحت مجوز MIT منتشر شده و استفاده، تغییر و انتشار آن آزاد است.
+Tkinter is included with the standard Python installer on Windows. On Linux, install your distribution's `python3-tk` package if needed.
 
----
-<p align="center"><b>Made with ❤️ in Python | ساخته شده با ❤️ به کمک پایتون</b></p> 
+## Scope of the checks
+
+## New tools
+
+- **Live dashboard:** Shows current download and upload rates in Mbps. Choose an interface or combine all interfaces. The graph shows the last 60 samples, taken every two seconds. These are local traffic rates, not internet speed-test results.
+- **Device scan:** Choose an active IPv4 interface and a CIDR range containing its address. Scans are limited to 256 addresses. Results include only observed ARP neighbors; devices that do not respond or appear in the ARP table may be missed. MAC vendor names are not inferred.
+- **Monitor:** Checks TCP connectivity to the chosen host on port 443 every 15 seconds. Set a latency threshold and optionally watch for new devices about once a minute. Events appear in the Monitor tab; start and stop monitoring there.
+- **History and export:** Save a snapshot of the latest results and export recorded events to JSON or CSV. History is held in memory until exported.
+- **DNS tools:** Compare A-record answers and response times from the system resolver, Cloudflare, and Google DNS. The reverse lookup button queries PTR records for an IP entered in the Domain field.
+
+The DNS resolver check shows locally configured resolvers and confirms a DNS query. It cannot prove whether DNS traffic leaks through a VPN; that requires an external controlled DNS endpoint.
+
+The security tab tests whether selected TCP ports are reachable on `127.0.0.1`. It is a limited local check, not a vulnerability assessment.
+
+## License
+
+MIT. See [LICENSE](LICENSE).
